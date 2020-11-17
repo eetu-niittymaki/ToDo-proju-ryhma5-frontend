@@ -2,16 +2,14 @@ import React, { Component } from 'react'
 
 export class AddTodo extends Component {
   state = [
-   { title: '', value: 0, error: '' },
-   { priority: '', value: 0, error: '' },
-   { dueDate: '', value: 0, error: ''},
+    { title: '', value: 0, error: '' },
+    { priority: '', value: 0, error: '' },
+    { dueDate: '', value: 0, error: ''},
   ]
-
-  
 
   onSubmit = (e) => {
     e.preventDefault()
-    this.props.addTodo([this.state.title, ',  ', this.state.priority,',  ', this.state.dueDate])
+    this.props.addTodo([this.state.title.replace(/^\w/, (c) => c.toUpperCase()) + ', ', this.state.priority + ', ', this.state.dueDate])
     this.setState({ title: '',  priority: '', dueDate: '' })
   }
 
