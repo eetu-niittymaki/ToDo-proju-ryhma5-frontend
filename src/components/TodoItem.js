@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import "../App.css";
 
 export class TodoItem extends Component {
+  state = [{ title: "" }, { priority: "" }, { dueDate: "" }];
+
   getStyle = () => {
     return {
       background: this.props.todo.completed ? "green" : "#fff",
@@ -18,15 +20,24 @@ export class TodoItem extends Component {
     const { id, title, priority, dueDate } = this.props.todo;
     return (
       <div className="todoItem" style={this.getStyle()}>
-        <p>
-          <input
-            type="checkbox"
-            onChange={this.props.markComplete.bind(this, id)}
-          />{" "}
-          {[title, ",  ", priority, ",  ", dueDate]}
-          <button onClick={this.props.delTodo.bind(this, id)} style={btnStyle}>
-            x
-          </button>
+        <p style={{ display: "flex" }}>
+          <div>
+            <input
+              type="checkbox"
+              onChange={this.props.markComplete.bind(this, id)}
+            />
+          </div>
+          <div style={{ flex: 10 }}>{title}</div>
+          <div style={{ flex: 5 }}>{priority}</div>
+          <div style={{ flex: 5 }}>{dueDate}</div>
+          <div style={{ flex: 1 }}>
+            <button
+              onClick={this.props.delTodo.bind(this, id)}
+              style={btnStyle}
+            >
+              x
+            </button>
+          </div>
         </p>
       </div>
     );
