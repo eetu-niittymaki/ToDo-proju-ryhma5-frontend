@@ -35,6 +35,8 @@ export class AddTodo extends Component {
         />
         <input
           type="number"
+          max="10"
+          min="0"
           name="priority"
           style={{ flex: "5", padding: "5px" }}
           placeholder="Priority"
@@ -53,7 +55,7 @@ export class AddTodo extends Component {
           type="submit"
           value="Submit"
           className="btn"
-          style={{ flex: "1" }}
+          style={{ float: "1" }}
         />
       </form>
     );
