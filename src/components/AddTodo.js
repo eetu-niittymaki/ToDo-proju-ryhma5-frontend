@@ -2,19 +2,47 @@ import React, { Component } from "react";
 
 export class AddTodo extends Component {
   state = [
-    { title: "", value: 0, error: "" },
-    { priority: "", value: 0, error: "" },
-    { dueDate: "", value: 0, error: "" },
+    { title: "" },
+    { priority: "" },
+    { dueDate: "" },
   ];
+
+  handleValidation () {
+    let state = this.state
+    let errors = {}
+    let formIsValid = true
+
+    if (!state.title) {
+      formIsValid = false
+      errors.title = 'Cannot be empty'
+    }
+
+    if (!state.priority) {
+      formIsValid = false
+      errors.priority= 'Cannot be empty'
+    }
+
+    if (!state.dueDate) {
+      formIsValid = false
+      errors.dueDate = 'Cannot be empty'
+    }
+
+    this.setState({errors: errors});
+    return formIsValid
+  }
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.addTodo([
+    if (this.handleValidation()) {
+      this.props.addTodo([
       this.state.title.replace(/^\w/, (c) => c.toUpperCase()) + ", ",
       this.state.priority + ", ",
       this.state.dueDate,
     ]);
     this.setState({ title: "", priority: "", dueDate: "" });
+    } else {
+      alert('Fields cannot be empty')
+    }
   };
 
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
