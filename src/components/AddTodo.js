@@ -1,11 +1,16 @@
 import React, { Component } from "react";
 
 export class AddTodo extends Component {
-  state = [
-    { title: "" },
-    { priority: "" },
-    { dueDate: "" },
-  ];
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      title: "",
+      priority: "" ,
+      dueDate: "" ,
+      errors: {}
+    };
+}
 
   handleValidation () {
     let state = this.state
@@ -41,7 +46,7 @@ export class AddTodo extends Component {
     ]);
     this.setState({ title: "", priority: "", dueDate: "" });
     } else {
-      alert('Fields cannot be empty')
+      alert('Form has errors')
     }
   };
 
@@ -61,6 +66,7 @@ export class AddTodo extends Component {
           value={this.state.title}
           onChange={this.onChange}
         />
+        <span style={{color: "red"}}>{this.state.errors.title}</span>
         <input
           type="number"
           max="10"
@@ -71,6 +77,7 @@ export class AddTodo extends Component {
           value={this.state.priority}
           onChange={this.onChange}
         />
+        <span style={{color: "red"}}>{this.state.errors.priority}</span>
         <input
           type="date"
           name="dueDate"
@@ -79,6 +86,7 @@ export class AddTodo extends Component {
           value={this.state.dueDate}
           onChange={this.onChange}
         />
+        <span style={{color: "red"}}>{this.state.errors.dueDate}</span>
         <input
           type="submit"
           value="Submit"
