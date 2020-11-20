@@ -8,46 +8,17 @@ export class AddTodo extends Component {
       title: "",
       priority: "" ,
       dueDate: "" ,
-      errors: {}
     };
 }
 
-  handleValidation () {
-    let state = this.state
-    let errors = {}
-    let formIsValid = true
-
-    if (!state.title) {
-      formIsValid = false
-      errors.title = 'Cannot be empty'
-    }
-
-    if (!state.priority) {
-      formIsValid = false
-      errors.priority= 'Cannot be empty'
-    }
-
-    if (!state.dueDate) {
-      formIsValid = false
-      errors.dueDate = 'Cannot be empty'
-    }
-
-    this.setState({errors: errors});
-    return formIsValid
-  }
-
   onSubmit = (e) => {
     e.preventDefault();
-    if (this.handleValidation()) {
       this.props.addTodo([
       this.state.title.replace(/^\w/, (c) => c.toUpperCase()) + ", ",
       this.state.priority + ", ",
       this.state.dueDate,
     ]);
     this.setState({ title: "", priority: "", dueDate: "" });
-    } else {
-      alert('Form has errors')
-    }
   };
 
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
@@ -65,8 +36,8 @@ export class AddTodo extends Component {
           placeholder="Add Todo..."
           value={this.state.title}
           onChange={this.onChange}
+          required='required'
         />
-        <span style={{color: "red"}}>{this.state.errors.title}</span>
         <input
           type="number"
           max="10"
@@ -76,8 +47,8 @@ export class AddTodo extends Component {
           placeholder="Priority"
           value={this.state.priority}
           onChange={this.onChange}
+          required='required'
         />
-        <span style={{color: "red"}}>{this.state.errors.priority}</span>
         <input
           type="date"
           name="dueDate"
@@ -85,8 +56,8 @@ export class AddTodo extends Component {
           placeholder="Due date"
           value={this.state.dueDate}
           onChange={this.onChange}
+          required='required'
         />
-        <span style={{color: "red"}}>{this.state.errors.dueDate}</span>
         <input
           type="submit"
           value="Submit"
