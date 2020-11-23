@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import "../App.css";
 
 export class TodoItem extends Component {
-  state = [{ title: "" }, { priority: "" }, { dueDate: "" }];
+  state = { title: "", priority: "", dueDate: "" };
 
   getStyle = () => {
     return {
@@ -27,7 +27,7 @@ export class TodoItem extends Component {
               onChange={this.props.markComplete.bind(this, id)}
             />
           </div>
-          <div style={{ flex: 10 }}>{title}</div>
+          <div style={{ flex: 10 }}>&nbsp;{title}</div>
           <div style={{ flex: 5 }}>{priority}</div>
           <div style={{ flex: 5 }}>{dueDate}</div>
           <div style={{ flex: 1 }}>
