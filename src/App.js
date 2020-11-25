@@ -1,71 +1,55 @@
 import "./App.sass";
-import React, { Component } from "react";
-import Todos from "./components/Todos.js";
-import AddTodo from "./components/AddTodo.js";
-import Header from "./components/layout/Header.js";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import About from "./components/pages/About.js";
+import React, { Component } from 'react'
+import Todos from './components/Todos.js'
+import AddTodo from './components/AddTodo.js'
+import Header from './components/layout/Header.js'
+import About from './components/pages/About.js'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import TodoCalendar from "./components/pages/TodoCalendar.js";
+import axios from 'axios';
 
-let id = 1;
 
 class App extends Component {
-  state = {
-    todos: [
-      {
-        id: id++,
-        title: "Do homework",
-        priority: 1,
-        dueDate: "20-11-2020",
-        completed: false,
-      },
-      {
-        id: id++,
-        title: "Sleep, dream",
-        priority: 4,
-        dueDate: "20-11-2020",
-        completed: false,
-      },
-      {
-        id: id++,
-        title: "Take out the garbage",
-        priority: 5,
-        dueDate: "20-11-2020",
-        completed: false,
-      },
-    ],
-  };
+  constructor(props) {
+    super(props)
+    this.state = {
+      todos: []
+    }
+  }
+
+  // GET all
+  async componentDidMount() {
+    let hr = await fetch('http://localhost:8080/todos/')
+    let json = await hr.json()
+    this.setState({ todos: json })
+  }
 
   // Toggle Complete
   markComplete = (id) => {
-    this.setState({
-      todos: this.state.todos.map((todo) => {
-        if (todo.id === id) {
-          todo.completed = !todo.completed;
-        }
-        return todo;
-      }),
-    });
-  };
-
-  // Delete ToDo
+    this.setState({ todos: this.state.todos.map(todo => {
+      if(todo.id === id) {
+        todo.completed = !todo.completed
+      }
+      return todo
+    })})
+  }
+  // https://jsonplaceholder.typicode.com/todos/
+  // DELETE ToDo
   delTodo = (id) => {
-    this.setState({
-      todos: [...this.state.todos.filter((todo) => todo.id !== id)],
-    });
-  };
+    axios.delete(`http://localhost:8080/todos/${id}`) 
+      .then(res => this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] }))
+  }
 
-  // Add Todo
-  addTodo = (todo) => {
-    const newTodo = {
-      id: id++,
-      title: todo[0],
-      priority: todo[1],
-      dueDate: todo[2],
-      completed: false,
-    };
-    this.setState({ todos: [...this.state.todos, newTodo] });
-  };
+  // POST Todo
+  addTodo = (task, priority, due_date) => {
+    axios.post('http://localhost:8080/todos/', {
+      task,
+      priority,
+      due_date,
+      is_done: false
+    })
+      .then(res => this.setState({ todos: [...this.state.todos, res.data] }))  
+  }
 
   render() {
     return (
