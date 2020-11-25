@@ -1,10 +1,11 @@
-import "./App.css";
+import "./App.sass";
 import React, { Component } from "react";
 import Todos from "./components/Todos.js";
 import AddTodo from "./components/AddTodo.js";
 import Header from "./components/layout/Header.js";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import About from "./components/pages/About.js";
+import TodoCalendar from "./components/pages/TodoCalendar.js";
 
 let id = 1;
 
@@ -87,6 +88,7 @@ class App extends Component {
               )}
             />
             <Route path="/about" component={About} />
+            <Route path="/TodoCalendar" component={TodoCalendar} />
           </div>
         </div>
       </Router>
