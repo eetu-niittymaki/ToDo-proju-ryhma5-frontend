@@ -5,34 +5,22 @@ import AddTodo from './components/AddTodo.js'
 import Header from './components/layout/Header.js'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import About from './components/pages/About.js'
+import axios from 'axios';
 
-let id = 1
 
 class App extends Component {
-  state = {
-    todos: [
-      {
-        id: id++,
-        title: 'Do homework',
-        priority: 1,
-        dueDate: '20-11-2020',
-        completed: false
-      },
-      {
-        id: id++,
-        title: 'Sleep, dream',
-        priority: 4,
-        dueDate: '20-11-2020',
-        completed: false
-      },
-      {
-        id: id++,
-        title: 'Take out the garbage',
-        priority: 5,
-        dueDate: '20-11-2020',
-        completed: false
-      }
-    ]
+  constructor(props) {
+    super(props)
+    this.state = {
+      todos: []
+    }
+  }
+
+  // GET all
+  async componentDidMount() {
+    let hr = await fetch('http://localhost:8080/todos/')
+    let json = await hr.json()
+    this.setState({ todos: json })
   }
 
   // Toggle Complete
@@ -44,22 +32,22 @@ class App extends Component {
       return todo
     })})
   }
-  
-  // Delete ToDo
+  // https://jsonplaceholder.typicode.com/todos/
+  // DELETE ToDo
   delTodo = (id) => {
-    this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] })
+    axios.delete(`http://localhost:8080/todos/${id}`) 
+      .then(res => this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] }))
   }
 
-  // Add Todo
-  addTodo = (title, priority, dueDate) => {
-    const newTodo = {
-      id: id++,
-      title: title,
-      priority: priority,
-      dueDate: dueDate,
-      completed: false
-    }
-    this.setState({ todos: [...this.state.todos, newTodo] })
+  // POST Todo
+  addTodo = (task, priority, due_date) => {
+    axios.post('http://localhost:8080/todos/', {
+      task,
+      priority,
+      due_date,
+      is_done: false
+    })
+      .then(res => this.setState({ todos: [...this.state.todos, res.data] }))  
   }
 
   render() {

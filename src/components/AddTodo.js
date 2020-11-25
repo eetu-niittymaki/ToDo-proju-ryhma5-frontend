@@ -1,24 +1,25 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types'
 
 export class AddTodo extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      title: "",
-      priority: "" ,
-      dueDate: "" ,
+      task: "",
+      priority: "",
+      due_date: "",
     };
 }
 
   onSubmit = (e) => {
     e.preventDefault();
       this.props.addTodo([
-      this.state.title.replace(/^\w/, (c) => c.toUpperCase()) + ", ",
+      this.state.task.replace(/^\w/, (c) => c.toUpperCase()) + ", ",
       this.state.priority + ", ",
-      this.state.dueDate,
+      this.state.due_date,
     ]);
-    this.setState({ title: "", priority: "", dueDate: "" });
+    this.setState({ task: "", priority: "", due_date: "" });
   };
 
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
@@ -31,10 +32,10 @@ export class AddTodo extends Component {
       >
         <input
           type="text"
-          name="title"
+          name="task"
           style={{ flex: "10", padding: "5px" }}
           placeholder="Add Todo..."
-          value={this.state.title}
+          value={this.state.task}
           onChange={this.onChange}
           required='required'
         />
@@ -51,10 +52,10 @@ export class AddTodo extends Component {
         />
         <input
           type="date"
-          name="dueDate"
+          name="due_date"
           style={{ flex: "5", padding: "5px" }}
           placeholder="Due date"
-          value={this.state.dueDate}
+          value={this.state.due_date}
           onChange={this.onChange}
           required='required'
         />
@@ -67,6 +68,10 @@ export class AddTodo extends Component {
       </form>
     );
   }
+}
+
+AddTodo.propTypes = {
+  addTodo: PropTypes.func.isRequired
 }
 
 export default AddTodo;
