@@ -54,3 +54,12 @@ p {
 .todoItem p {
   color: black;
 }
+
+video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: -1;
+  margin-left: -1%;
+}

@@ -12,13 +12,14 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      todos: []
+      todos: [],
+      port: (process.env.PORT || 8080)
     }
   }
 
   // GET all
   async componentDidMount() {
-    let hr = await fetch('http://localhost:8080/todos/')
+    let hr = await fetch(`http://localhost:${this.state.port}/todos/`)
     let json = await hr.json()
     this.setState({ todos: json })
   }
@@ -27,7 +28,7 @@ class App extends Component {
   markComplete = (id) => {
     this.setState({ todos: this.state.todos.map(todo => {
       if(todo.id === id) {
-        todo.completed = !todo.completed
+        todo.is_done = !todo.is_done
       }
       return todo
     })})
@@ -35,19 +36,19 @@ class App extends Component {
   // https://jsonplaceholder.typicode.com/todos/
   // DELETE ToDo
   delTodo = (id) => {
-    axios.delete(`http://localhost:8080/todos/${id}`) 
+    axios.delete(`http://localhost:${this.state.port}/todos/${id}`) 
       .then(res => this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] }))
   }
 
   // POST Todo
   addTodo = (task, priority, due_date) => {
-    axios.post('http://localhost:8080/todos/', {
-      task,
-      priority,
-      due_date,
+    const newTodo = {
+      task: task,
+      priority: priority,
+      due_date: due_date,
       is_done: false
-    })
-      .then(res => this.setState({ todos: [...this.state.todos, res.data] }))  
+    }
+    this.setState({ todos: [...this.state.todos, newTodo] }) 
   }
 
   render() {
@@ -55,6 +56,7 @@ class App extends Component {
       <Router>
         <div className="App">
           <div className="container">
+          <video src='/videos/video-1.mp4' autoPlay loop muted /> 
             <Header/>
             <Route exact path="/" render={props => (
               <React.Fragment>

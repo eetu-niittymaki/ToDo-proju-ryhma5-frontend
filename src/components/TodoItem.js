@@ -6,8 +6,8 @@ export class TodoItem extends Component {
 
   getStyle = () => {
     return {
-      background: this.props.todo.completed ? "green" : "#fff",
-      textDecoration: this.props.todo.completed ? "line-through" : "none",
+      background: this.props.todo.is_done ? "green" : "#fff",
+      textDecoration: this.props.todo.is_done ? "line-through" : "none",
     }
   }
 
@@ -19,7 +19,7 @@ export class TodoItem extends Component {
     if (!this.props.todo) {
       return <div>Loading....</div>
     }
-    const { id, task, priority, due_date, completed } = this.props.todo;
+    const { id, task, priority, due_date, is_done } = this.props.todo;
     return (
   
       <div className="todoItem" style={this.getStyle()}>
@@ -27,7 +27,7 @@ export class TodoItem extends Component {
           
             <input
               type="checkbox"
-              defaultChecked={completed}
+              defaultChecked={is_done}
               onChange={this.props.markComplete.bind(this, id)}
             />
           {" "}
