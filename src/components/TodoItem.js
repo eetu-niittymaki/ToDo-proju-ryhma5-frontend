@@ -30,7 +30,8 @@ export class TodoItem extends Component {
               defaultChecked={is_done}
               onChange={this.props.markComplete.bind(this, id)}
             />
-          {" "}
+          </div>
+          &nbsp;
           <div style={{ flex: 10 }}>{task}</div>
           <div style={{ flex: 5 }}>{priority}</div>
           <div style={{ flex: 5 }}>{due_date}</div>
@@ -42,17 +43,17 @@ export class TodoItem extends Component {
               x
             </button>
           </div>
-        </p>
+        </div>
       </div>
     )
   }
 }
 
 TodoItem.propTypes = {
-  todo: PropTypes.object.isRequired,
-  markComplete: PropTypes.func.isRequired,
-  delTodo: PropTypes.func.isRequired
 }
+  markComplete: PropTypes.func.isRequired,
+  todo: PropTypes.object.isRequired,
+  delTodo: PropTypes.func.isRequired
 
 const btnStyle = {
   background: "#ff0000",
