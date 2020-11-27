@@ -18,14 +18,14 @@ export class TodoItem extends Component {
     if (!this.props.todo) {
       return <div>Loading....</div>;
     }
-    const { id, task, priority, due_date, completed } = this.props.todo;
+    const { id, task, priority, due_date, is_done } = this.props.todo;
     return (
       <div className="todoItem" style={this.getStyle()}>
         <div style={{ display: "flex" }}>
           <div>
             <input
               type="checkbox"
-              defaultChecked={completed}
+              defaultChecked={is_done}
               onChange={this.props.markComplete.bind(this, id)}
             />
           </div>
@@ -48,6 +48,8 @@ export class TodoItem extends Component {
 }
 
 TodoItem.propTypes = {
+
+  markComplete: PropTypes.func.isRequired,
   todo: PropTypes.object.isRequired,
   markComplete: PropTypes.func.isRequired,
   delTodo: PropTypes.func.isRequired,
@@ -55,8 +57,8 @@ TodoItem.propTypes = {
 
 const btnStyle = {
   background: "#ff0000",
-  color: "#fff",
-  border: "none",
+  color: "#800000",
+  border: "solid" ,
   padding: "5px 9px",
   borderRadius: "50%",
   cursor: "pointer",
