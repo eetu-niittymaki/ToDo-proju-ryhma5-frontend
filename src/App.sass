@@ -2,7 +2,8 @@ $background-color: black
 $todoitem-back-color: #fff
 $todoitem-color: black
 $link-color: aqua
-
+$calendartileback-color: black
+$calendartile-color: white
 
 
 
@@ -64,7 +65,24 @@ p
   color: yellow
   text-align: center
   text-decoration: none
-
-.calTile
-  background-color: $link-color
+  width: 600px
+  max-width: 100%
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.500em;
+  margin: auto
   
+.calTile
+  // background-color: $link-color
+  padding: 5px
+  border: 1px solid yellow
+  color: $calendartile-color
+  background: $calendartileback-color
+
+  .dateTime
+    margin: auto
+    color: white
+
+
+
+
+

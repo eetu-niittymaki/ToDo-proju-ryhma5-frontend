@@ -1,30 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "../../App.sass";
 
-class TodoCalendar extends React.Component {
-  state = {
-    value: new Date(),
-  };
-  onChange = (value) => this.setState({ value });
+const TodoCalendar = (props) => {
+  const [date, setDate] = useState(new Date());
 
-  render() {
-    const { value } = this.state;
+  const onChange = (date) => setDate(date);
 
-    return (
-      <div className="cal">
-        <header>
-          <h1>react-calendar sample page</h1>
-        </header>
-        <Calendar
-          className="calendar"
-          onchange={this.onChange}
-          value={value}
-          tileClassName="calTile"
-        />
-      </div>
-    );
-  }
-}
+  /* const reverse = () => {
+    let split = date2.split("");
+
+    let rev = split.reverse();
+
+    let join = rev.join("");
+    console.log(join);
+  }; */
+
+  return (
+    <div className="cal">
+      <Calendar
+        showDoubleView="true"
+        className="calendar"
+        onChange={onChange}
+        value={date}
+        tileClassName="calTile"
+        //tileContent={}
+      />
+      {console.log(date.toLocaleDateString())}
+    </div>
+  );
+};
 
 export default TodoCalendar;
