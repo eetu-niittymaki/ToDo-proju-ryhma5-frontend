@@ -30,7 +30,11 @@ class App extends Component {
     this.setState({ todos: this.state.todos.map(todo => {
       if(todo.id === id) {
         todo.is_done = !todo.is_done
-      }
+        const is_done = this.state
+        axios.put(`http://localhost:${this.state.port}/todos/${id}`, {
+          is_done: !is_done
+        })
+      } 
       return todo
     })})
   }
@@ -67,6 +71,7 @@ class App extends Component {
               </React.Fragment>
             )} />
             <Route path="/about" component={About} />
+            <Route path="/TodoCalendar" component={TodoCalendar} />
           </div>
         </div>
       </Router>

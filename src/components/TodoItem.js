@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import "../App.css";
+import "../App.sass";
 
 export class TodoItem extends Component {
 
@@ -21,10 +21,9 @@ export class TodoItem extends Component {
     }
     const { id, task, priority, due_date, is_done } = this.props.todo;
     return (
-  
       <div className="todoItem" style={this.getStyle()}>
-        <p style={{ display: "flex" }}>
-          
+        <div style={{ display: "flex" }}>
+          <div>
             <input
               type="checkbox"
               defaultChecked={is_done}
@@ -50,15 +49,16 @@ export class TodoItem extends Component {
 }
 
 TodoItem.propTypes = {
-}
+
   markComplete: PropTypes.func.isRequired,
   todo: PropTypes.object.isRequired,
   delTodo: PropTypes.func.isRequired
+}
 
 const btnStyle = {
   background: "#ff0000",
-  color: "#fff",
-  border: "none",
+  color: "#800000",
+  border: "solid" ,
   padding: "5px 9px",
   borderRadius: "50%",
   cursor: "pointer",
