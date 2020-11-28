@@ -14,10 +14,10 @@ export class AddTodo extends Component {
     };
 }
   // POST Todo
-  onSubmit = (e) => {
+  onSubmit = async e => {
     e.preventDefault();
     const {task, priority, due_date} = this.state 
-    axios.post(`http://localhost:${this.state.port}/todos`, {
+    await axios.post(`http://localhost:${this.state.port}/todos`, {
       task: (task.replace(/^\w/, (c) => c.toUpperCase())),
       priority: priority,
       due_date: due_date,

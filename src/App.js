@@ -30,18 +30,25 @@ class App extends Component {
     this.setState({ todos: this.state.todos.map(todo => {
       if(todo.id === id) {
         todo.is_done = !todo.is_done
-        const is_done = this.state
-        axios.put(`http://localhost:${this.state.port}/todos/${id}`, {
-          is_done: !is_done
-        })
+        let is_done = todo.is_done
+        console.log(is_done)
+        if (is_done === true || is_done === 1) {
+          axios.put(`http://localhost:${this.state.port}/todos/${id}`, {
+            is_done: false
+          })
+        } else {
+          axios.put(`http://localhost:${this.state.port}/todos/${id}`, {
+            is_done: true
+          })
+        }
       } 
       return todo
     })})
   }
   // https://jsonplaceholder.typicode.com/todos/
   // DELETE ToDo
-  delTodo = (id) => {
-    axios.delete(`http://localhost:${this.state.port}/todos/${id}`) 
+  delTodo = async id => {
+    await axios.delete(`http://localhost:${this.state.port}/todos/${id}`) 
       .then(res => this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] }))
   }
 
