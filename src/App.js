@@ -15,6 +15,7 @@ class App extends Component {
     this.state = {
       todos: [],
       port: (process.env.PORT || 8080)
+
     }
   }
 
@@ -30,22 +31,15 @@ class App extends Component {
     this.setState({ todos: this.state.todos.map(todo => {
       if(todo.id === id) {
         todo.is_done = !todo.is_done
-        let is_done = todo.is_done
-        console.log(is_done)
-        if (is_done === true || is_done === 1) {
+        console.log(this.state.todos[id-1].is_done)
           axios.put(`http://localhost:${this.state.port}/todos/${id}`, {
-            is_done: false
+            is_done: this.state.todos[id-1].is_done
           })
-        } else {
-          axios.put(`http://localhost:${this.state.port}/todos/${id}`, {
-            is_done: true
-          })
-        }
-      } 
+      }
       return todo
     })})
   }
-  // https://jsonplaceholder.typicode.com/todos/
+
   // DELETE ToDo
   delTodo = async id => {
     await axios.delete(`http://localhost:${this.state.port}/todos/${id}`) 
