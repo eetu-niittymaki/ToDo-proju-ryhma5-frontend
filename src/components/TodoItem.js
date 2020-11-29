@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { IconButton } from "@material-ui/core";
+import DeleteOutlined from "@material-ui/icons/DeleteOutlined";
 import "../App.sass";
 
 export class TodoItem extends Component {
@@ -35,12 +37,10 @@ export class TodoItem extends Component {
           <div style={{ flex: 5 }}>{priority}</div>
           <div style={{ flex: 5 }}>{due_date}</div>
           <div style={{ flex: 1 }}>
-            <button
-              onClick={this.props.delTodo.bind(this, id)}
-              style={btnStyle}
-            >
-              x
-            </button>
+            <IconButton aria-label="Delete Todo"
+              onClick={this.props.delTodo.bind(this, id)}>
+              <DeleteOutlined/>
+            </IconButton>
           </div>
         </div>
       </div>
@@ -53,16 +53,6 @@ TodoItem.propTypes = {
   markComplete: PropTypes.func.isRequired,
   todo: PropTypes.object.isRequired,
   delTodo: PropTypes.func.isRequired
-}
-
-const btnStyle = {
-  background: "#ff0000",
-  color: "#800000",
-  border: "solid" ,
-  padding: "5px 9px",
-  borderRadius: "50%",
-  cursor: "pointer",
-  float: "right",
 }
 
 export default TodoItem;
