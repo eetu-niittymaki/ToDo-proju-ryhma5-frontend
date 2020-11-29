@@ -15,7 +15,6 @@ class App extends Component {
     this.state = {
       todos: [],
       port: (process.env.PORT || 8080)
-
     }
   }
 
@@ -27,14 +26,13 @@ class App extends Component {
   }
 
   // Toggle Complete
-  markComplete = (id) => {
+  markComplete = id => {
     this.setState({ todos: this.state.todos.map(todo => {
       if(todo.id === id) {
         todo.is_done = !todo.is_done
-        console.log(this.state.todos[id-1].is_done)
-          axios.put(`http://localhost:${this.state.port}/todos/${id}`, {
-            is_done: this.state.todos[id-1].is_done
-          })
+        axios.put(`http://localhost:${this.state.port}/todos/${id}`, {
+          is_done: this.state.todos[id-1].is_done
+        })
       }
       return todo
     })})
