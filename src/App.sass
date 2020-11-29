@@ -3,7 +3,8 @@ $todoitem-back-color: #fff
 $todoitem-color: black
 $link-color: aqua
 
-@import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap')
+@import url("https://fonts.googleapis.com/css2?family=Squada+One&display=swap")
 
 *
   box-sizing: border-box
@@ -11,53 +12,55 @@ $link-color: aqua
   padding: 0
 
 body
-  height: 100%;
-  font-family: Arial, Helvetica, sans-sherif;
-  line-height: 1.4;
-  background: $background-color;
-  background-size: 9000px;
-  background-position: center;
+  height: 100%
+  font-family: "Squada One"
+  font-size: 1.2em
 
+
+.title
+  font-family: "Russo One"
+  font-size: 4em
+  background: -webkit-linear-gradient(#eee, #333);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 
 a
-  color: darkcyan;
-  text-decoration: none;
+  color: darkcyan
+  text-decoration: none
+  font-size: 1.3em
 
 .container 
-  padding: 0 1rem;
-
+  padding: 0 1rem
 
 .btn 
-  display: inline-block;
-  border: none;
-  background: #555;
-  color: #fff;
-  padding: 7px 20px;
-  cursor: pointer;
+  display: inline-block
+  border: none
+  background: #555
+  color: #fff
+  padding: 7px 20px
+  cursor: pointer
+  font-family: "Russo One"
 
 
 .btn:hover 
-  background: #666;
+  background: #666
 
 
 .headerLink 
-  color: $link-color;
-  font-size: large;
-
+  color: $link-color
+  font-size: large
 
 p 
-  color: #fff;
-
+  color: #fff
 
 .todoItem 
-  background-color: $todoitem-back-color;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
+  padding: 5px
+  margin-bottom: 10px
+  border-radius: 10px
 
 
 .todoItem p 
-  color: $todoitem-color;
+  color: $todoitem-color
 
 .calendar
   color: yellow
@@ -74,10 +77,3 @@ video
   position: fixed
   z-index: -1
   margin-left: -1%
-
-.title
-  font-family: "YellowTail", Arial
-  font-size: 52pt
-  background: -webkit-linear-gradient(#eee, black);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;

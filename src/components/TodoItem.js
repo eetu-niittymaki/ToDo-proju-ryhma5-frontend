@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { IconButton } from "@material-ui/core";
 import DeleteOutlined from "@material-ui/icons/DeleteOutlined";
+import Checkbox from '@material-ui/core/Checkbox';
 import "../App.sass";
 
 export class TodoItem extends Component {
@@ -25,13 +26,12 @@ export class TodoItem extends Component {
     return (
       <div className="todoItem" style={this.getStyle()}>
         <div style={{ display: "flex" }}>
-          <div>
-            <input
-              type="checkbox"
+            <Checkbox
+              color="primary"
               defaultChecked={is_done}
               onChange={this.props.markComplete.bind(this, id)}
+              inputProps={{ 'aria-label': 'primary checkbox' }}
             />
-          </div>
           &nbsp;
           <div style={{ flex: 10 }}>{task}</div>
           <div style={{ flex: 5 }}>{priority}</div>
