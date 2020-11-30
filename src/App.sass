@@ -2,78 +2,173 @@ $background-color: black
 $todoitem-back-color: #fff
 $todoitem-color: black
 $link-color: aqua
+$calendartileback-color: black
+$calendartile-color: white
 
-@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap')
 @import url("https://fonts.googleapis.com/css2?family=Squada+One&display=swap")
 
-*
-  box-sizing: border-box
-  margin: 0
-  padding: 0
-
 body
-  height: 100%
-  font-family: "Squada One"
+  height: 100%;
+  font-family: "Squada One";
   font-size: 1.2em
+  line-height: 1.4;
+  background: $background-color;
+  background-size: 9000px;
+  background-position: center;
 
-
-.title
-  font-family: "Russo One"
-  font-size: 4em
-  background: -webkit-linear-gradient(#eee, #333);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 
 a
-  color: darkcyan
-  text-decoration: none
-  font-size: 1.3em
+  color: darkcyan;
+  text-decoration: none;
 
 .container 
-  padding: 0 1rem
+  padding: 0 1rem;
+
 
 .btn 
-  display: inline-block
-  border: none
-  background: #555
-  color: #fff
-  padding: 7px 20px
-  cursor: pointer
-  font-family: "Russo One"
+  display: inline-block;
+  border: none;
+  background: #555;
+  color: #fff;
+  padding: 7px 20px;
+  cursor: pointer;
 
 
 .btn:hover 
-  background: #666
+  background: #666;
 
 
 .headerLink 
-  color: $link-color
-  font-size: large
+  color: $link-color;
+  font-size: large;
+
 
 p 
-  color: #fff
+  color: #fff;
+
 
 .todoItem 
-  padding: 5px
-  margin-bottom: 10px
-  border-radius: 10px
+  text-align: center
+  display: flex
+  flex-wrap: wrap;
+  background-color: $todoitem-back-color;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
 
 
 .todoItem p 
-  color: $todoitem-color
+  color: $todoitem-color;
 
 .calendar
   color: yellow
   text-align: center
   text-decoration: none
-
+  width: 600px
+  max-width: 100%
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.500em;
+  margin: auto
+  
 .calTile
   background-color: $link-color
-  
+  padding: 5px
+  border: 1px solid yellow
+  color: $calendartile-color
+  background: $calendartileback-color
+
 video 
   object-fit: cover
   width: 100%
   height: 100%
   position: fixed
   z-index: -1
-  margin-left: -1%
+  margin-left: -4%
+
+.title
+  font-family: "Yellowtail", Arial
+  font-size: 52pt
+  background: -webkit-linear-gradient(#eee, black);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+.inputFields
+  display: flex
+  flex-wrap: wrap
+  text-align: center
+  margin-bottom: 20px
+
+.checkbox
+  flex: 25%
+  
+.todoTask
+  flex: 80%
+
+.todoPriority
+  flex: 80%
+
+.todoDuedate
+  flex: 100%
+
+.todoButton
+  flex: 20%
+
+.inputTask
+  flex: 100%
+  padding: 5px
+
+.inputPriority
+  flex: 35%
+  padding: 5px
+
+.inputDuedate
+  flex: 35%
+  padding: 5px
+
+@media only screen and (min-width: 600px) 
+  
+  video
+    margin-left: -3%
+
+@media only screen and (min-width: 768px)
+  
+  video
+    margin-left: -2%
+
+  .inputTask
+    flex: 10
+
+  .inputPriority
+    flex: 5
+
+  .inputDuedate
+    flex: 5
+  
+  .todoItem
+    text-align: initial
+  
+  .checkbox
+    flex: none
+
+  .todoTask
+    flex: 10
+    padding-top: 10px
+
+  .todoPriority
+    flex: 5
+    padding-top: 12px
+
+  .todoDuedate
+    flex: 5
+    padding-top: 12px
+
+  .todoButton
+    flex: 1
+
+  .inputFields
+    text-align: initial
+
+@media only screen and (min-width: 1200px)
+  video
+    margin-left: -1%

@@ -25,25 +25,26 @@ export class TodoItem extends Component {
     const { id, task, priority, due_date, is_done } = this.props.todo;
     return (
       <div className="todoItem" style={this.getStyle()}>
-        <div style={{ display: "flex" }}>
+        <div className="checkbox">
             <Checkbox
               color="primary"
               defaultChecked={is_done}
               onChange={this.props.markComplete.bind(this, id)}
               inputProps={{ 'aria-label': 'primary checkbox' }}
             />
+        </div>
           &nbsp;
-          <div style={{ flex: 10 }}>{task}</div>
-          <div style={{ flex: 5 }}>{priority}</div>
-          <div style={{ flex: 5 }}>{due_date}</div>
-          <div style={{ flex: 1 }}>
+          <div className="todoTask">{task}</div>
+          <div className="todoPriority">{priority}</div>
+          <div className="todoDuedate">{due_date}</div>
+          <div className="todoButton">
             <IconButton aria-label="Delete Todo"
-              onClick={this.props.delTodo.bind(this, id)}>
+              onClick={this.props.delTodo.bind(this, id)}
+            >
               <DeleteOutlined/>
             </IconButton>
           </div>
         </div>
-      </div>
     )
   }
 }
