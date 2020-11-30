@@ -52,6 +52,9 @@ p
 
 
 .todoItem 
+  text-align: center
+  display: flex
+  flex-wrap: wrap;
   background-color: $todoitem-back-color;
   padding: 10px;
   margin-bottom: 10px;
@@ -84,7 +87,7 @@ video
   height: 100%
   position: fixed
   z-index: -1
-  margin-left: -1%
+  margin-left: -4%
 
 .title
   font-family: "YellowTail", Arial
@@ -92,3 +95,86 @@ video
   background: -webkit-linear-gradient(#eee, black);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+
+.inputFields
+  display: flex
+  flex-wrap: wrap
+  text-align: center
+  margin-bottom: 20px
+
+.checkbox
+  flex: 20%
+.todoTask
+  flex: 80%
+
+.todoPriority
+  flex: 80%
+
+.todoDuedate
+  flex: 100%
+
+.todoButton
+  flex: 20%
+
+.inputTask
+  flex: 100%
+  padding: 5px
+
+.inputPriority
+  flex: 35%
+  padding: 5px
+
+.inputDuedate
+  flex: 35%
+  padding: 5px
+
+@media only screen and (min-width: 600px) 
+  
+  video
+    margin-left: -3%
+
+@media only screen and (min-width: 768px)
+  
+  video
+    margin-left: -2%
+
+  .checkbox
+    flex: none
+
+  .inputTask
+    flex: 10
+
+  .inputPriority
+    flex: 5
+
+  .inputDuedate
+    flex: 5
+  
+  .todoItem
+    text-align: initial
+  
+  .checkbox
+    flex: none
+    padding-top: 12px
+
+  .todoTask
+    flex: 10
+    padding-top: 12px
+
+  .todoPriority
+    flex: 5
+    padding-top: 12px
+
+  .todoDuedate
+    flex: 5
+    padding-top: 12px
+
+  .todoButton
+    flex: 1
+
+  .inputFields
+    text-align: initial
+
+@media only screen and (min-width: 1200px)
+  video
+    margin-left: -1%

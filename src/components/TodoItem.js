@@ -23,24 +23,24 @@ export class TodoItem extends Component {
     const { id, task, priority, due_date, is_done } = this.props.todo;
     return (
       <div className="todoItem" style={this.getStyle()}>
-        <div style={{ display: "flex" }}>
-          <div>
-            <input
-              type="checkbox"
-              defaultChecked={is_done}
-              onChange={this.props.markComplete.bind(this, id)}
-            />
-          </div>
-          &nbsp;
-          <div style={{ flex: 10 }}>{task}</div>
-          <div style={{ flex: 5 }}>{priority}</div>
-          <div style={{ flex: 5 }}>{due_date}</div>
-          <div style={{ flex: 1 }}>
-            <IconButton aria-label="Delete Todo"
-              onClick={this.props.delTodo.bind(this, id)}>
-              <DeleteOutlined/>
-            </IconButton>
-          </div>
+        <div className="checkbox">
+          <input
+            type="checkbox"
+            defaultChecked={is_done}
+            onChange={this.props.markComplete.bind(this, id)}
+          />
+        </div>
+        &nbsp;
+        <div className="todoTask">{task}</div>
+        <div className="todoPriority">{priority}</div>
+        <div className="todoDuedate">{due_date}</div>
+        <div className="todoButton">
+          <IconButton
+            aria-label="Delete Todo"
+            onClick={this.props.delTodo.bind(this, id)}
+          >
+            <DeleteOutlined />
+          </IconButton>
         </div>
       </div>
     );
@@ -48,7 +48,6 @@ export class TodoItem extends Component {
 }
 
 TodoItem.propTypes = {
-
   markComplete: PropTypes.func.isRequired,
   todo: PropTypes.object.isRequired,
   markComplete: PropTypes.func.isRequired,
