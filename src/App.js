@@ -25,22 +25,22 @@ class App extends Component {
   }
 
   // Toggle Complete
-  markComplete = (id) => {
+  markComplete = id => {
     this.setState({ todos: this.state.todos.map(todo => {
       if(todo.id === id) {
         todo.is_done = !todo.is_done
-        const is_done = this.state
+        console.log(this.state.todos[id-1].is_done)
         axios.put(`http://localhost:${this.state.port}/todos/${id}`, {
-          is_done: !is_done
+          is_done: this.state.todos[id-1].is_done
         })
-      } 
+      }
       return todo
     })})
   }
-  // https://jsonplaceholder.typicode.com/todos/
+
   // DELETE ToDo
-  delTodo = (id) => {
-    axios.delete(`http://localhost:${this.state.port}/todos/${id}`) 
+  delTodo = async id => {
+    await axios.delete(`http://localhost:${this.state.port}/todos/${id}`) 
       .then(res => this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] }))
   }
 
