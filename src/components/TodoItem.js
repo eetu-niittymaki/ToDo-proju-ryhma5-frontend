@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { IconButton } from "@material-ui/core";
 import DeleteOutlined from "@material-ui/icons/DeleteOutlined";
+import Checkbox from '@material-ui/core/Checkbox';
 import "../App.sass";
 
 export class TodoItem extends Component {
@@ -24,26 +25,26 @@ export class TodoItem extends Component {
     return (
       <div className="todoItem" style={this.getStyle()}>
         <div className="checkbox">
-          <input
-            type="checkbox"
-            defaultChecked={is_done}
-            onChange={this.props.markComplete.bind(this, id)}
-          />
+            <Checkbox
+              color="primary"
+              defaultChecked={is_done}
+              onChange={this.props.markComplete.bind(this, id)}
+              inputProps={{ 'aria-label': 'primary checkbox' }}
+            />
         </div>
-        &nbsp;
-        <div className="todoTask">{task}</div>
-        <div className="todoPriority">{priority}</div>
-        <div className="todoDuedate">{due_date}</div>
-        <div className="todoButton">
-          <IconButton
-            aria-label="Delete Todo"
-            onClick={this.props.delTodo.bind(this, id)}
-          >
-            <DeleteOutlined />
-          </IconButton>
+          &nbsp;
+          <div className="todoTask">{task}</div>
+          <div className="todoPriority">{priority}</div>
+          <div className="todoDuedate">{due_date}</div>
+          <div className="todoButton">
+            <IconButton aria-label="Delete Todo"
+              onClick={this.props.delTodo.bind(this, id)}
+            >
+              <DeleteOutlined/>
+            </IconButton>
+          </div>
         </div>
-      </div>
-    );
+    )
   }
 }
 

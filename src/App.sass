@@ -5,16 +5,13 @@ $link-color: aqua
 $calendartileback-color: black
 $calendartile-color: white
 
-@import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
-
-*
-  box-sizing: border-box
-  margin: 0
-  padding: 0
+@import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap')
+@import url("https://fonts.googleapis.com/css2?family=Squada+One&display=swap")
 
 body
   height: 100%;
-  font-family: Arial, Helvetica, sans-sherif;
+  font-family: "Squada One";
+  font-size: 1.2em
   line-height: 1.4;
   background: $background-color;
   background-size: 9000px;
@@ -90,7 +87,7 @@ video
   margin-left: -4%
 
 .title
-  font-family: "YellowTail", Arial
+  font-family: "Yellowtail", Arial
   font-size: 52pt
   background: -webkit-linear-gradient(#eee, black);
   -webkit-background-clip: text;
@@ -103,7 +100,8 @@ video
   margin-bottom: 20px
 
 .checkbox
-  flex: 20%
+  flex: 25%
+  
 .todoTask
   flex: 80%
 
@@ -138,9 +136,6 @@ video
   video
     margin-left: -2%
 
-  .checkbox
-    flex: none
-
   .inputTask
     flex: 10
 
@@ -155,11 +150,10 @@ video
   
   .checkbox
     flex: none
-    padding-top: 12px
 
   .todoTask
     flex: 10
-    padding-top: 12px
+    padding-top: 10px
 
   .todoPriority
     flex: 5

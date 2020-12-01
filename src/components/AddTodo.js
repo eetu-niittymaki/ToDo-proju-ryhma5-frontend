@@ -42,10 +42,10 @@ export class AddTodo extends Component {
       <form
         className="inputFields"
         onSubmit={this.onSubmit}
-        //style={{ display: "flex", marginBottom: "20px" }}
+        // style={{ display: "flex", marginBottom: "20px" }}
       >
         <input
-          className="inputTask"
+        className="inputTask"
           type="text"
           name="task"
           // style={{ flex: "10", padding: "5px" }}
@@ -55,12 +55,12 @@ export class AddTodo extends Component {
           required="required"
         />
         <input
-          className="inputPriority"
+        className="inputPriority"
           type="number"
           max="10"
           min="1"
           name="priority"
-          // style={{ flex: "5", padding: "5px" }}
+          //  style={{ flex: "5", padding: "5px" }}
           placeholder="Priority"
           value={this.state.priority}
           onChange={this.onChange}
