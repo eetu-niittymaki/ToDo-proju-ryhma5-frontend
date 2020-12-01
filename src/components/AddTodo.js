@@ -39,50 +39,47 @@ export class AddTodo extends Component {
 
   render() {
     return (
-      <form
-        className="inputFields"
-        onSubmit={this.onSubmit}
-        // style={{ display: "flex", marginBottom: "20px" }}
-      >
-        <input
-        className="inputTask"
-          type="text"
-          name="task"
-          // style={{ flex: "10", padding: "5px" }}
-          placeholder="Add Todo..."
-          value={this.state.task}
-          onChange={this.onChange}
-          required="required"
-        />
-        <input
-        className="inputPriority"
-          type="number"
-          max="10"
-          min="1"
-          name="priority"
-          //  style={{ flex: "5", padding: "5px" }}
-          placeholder="Priority"
-          value={this.state.priority}
-          onChange={this.onChange}
-          required="required"
-        />
-        <input
-          className="inputDuedate"
-          type="date"
-          name="due_date"
-          // style={{ flex: "5", padding: "5px" }}
-          placeholder="Due date"
-          value={this.state.due_date}
-          onChange={this.onChange}
-          required="required"
-        />
-        <input
-          type="submit"
-          value="Submit"
-          className="btn"
-          style={{ float: "1" }}
-        />
-      </form>
+      <div className="addTodosContainer">
+        <form
+          className="inputFields"
+          onSubmit={this.onSubmit}
+          // style={{ display: "flex", marginBottom: "20px" }}
+        >
+          <input
+            className="inputTask"
+            type="text"
+            name="task"
+            // style={{ flex: "10", padding: "5px" }}
+            placeholder="Add Todo..."
+            value={this.state.task}
+            onChange={this.onChange}
+            required="required"
+          />
+          <input
+            className="inputPriority"
+            type="number"
+            max="10"
+            min="1"
+            name="priority"
+            //  style={{ flex: "5", padding: "5px" }}
+            placeholder="Priority"
+            value={this.state.priority}
+            onChange={this.onChange}
+            required="required"
+          />
+          <input
+            className="inputDuedate"
+            type="date"
+            name="due_date"
+            // style={{ flex: "5", padding: "5px" }}
+            placeholder="Due date"
+            value={this.state.due_date}
+            onChange={this.onChange}
+            required="required"
+          />
+          <input type="submit" value="Submit" className="btn" />
+        </form>
+      </div>
     );
   }
 }
