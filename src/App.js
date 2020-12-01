@@ -5,6 +5,7 @@ import AddTodo from "./components/AddTodo.js";
 import Header from "./components/layout/Header.js";
 import About from "./components/pages/About.js";
 import Play from "./components/sounds/Play.js";
+import SoundEffect from "./components/sounds/SoundEffect.js";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import TodoCalendar from "./components/pages/TodoCalendar.js";
 import axios from "axios";
@@ -70,6 +71,7 @@ class App extends Component {
           <div className="container">
             <video src="/videos/video-1.mp4" autoPlay loop muted />
             <Play />
+            <SoundEffect />
             <Header />
             <Route
               exact

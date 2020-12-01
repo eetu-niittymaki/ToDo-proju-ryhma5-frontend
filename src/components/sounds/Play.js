@@ -8,9 +8,6 @@ export class Play extends Component {
         <Sound
           url="/sounds/backsound.wav"
           playStatus={Sound.status.PLAYING}
-          onLoading={this.handleSongLoading}
-          onPlaying={this.handleSongPlaying}
-          onFinishedPlaying={this.handleSongFinishedPlaying}
           loop="true"
         />
       </div>
