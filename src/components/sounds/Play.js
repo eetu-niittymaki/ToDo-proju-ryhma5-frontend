@@ -8,7 +8,6 @@ export class Play extends Component {
         <Sound
           url="/sounds/backsound.wav"
           playStatus={Sound.status.PLAYING}
-          playFromPosition={300 /* in milliseconds */}
           onLoading={this.handleSongLoading}
           onPlaying={this.handleSongPlaying}
           onFinishedPlaying={this.handleSongFinishedPlaying}
