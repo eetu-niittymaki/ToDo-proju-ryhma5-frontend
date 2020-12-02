@@ -4,6 +4,7 @@ $todoitem-color: black
 $link-color: aqua
 $calendartileback-color: -webkit-linear-gradient(black, black, #555555,  #000127, #000127, #000127)
 $calendartile-color: white
+$inputback-color: linear-gradient(grey, white, grey);
 
 @import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap')
 @import url("https://fonts.googleapis.com/css2?family=Squada+One&display=swap")
@@ -118,15 +119,17 @@ video
 .inputTask
   flex: 100%
   padding: 5px
+  background-image: $inputback-color
 
 .inputPriority
   flex: 33%
   padding: 5px
+  background-image: $inputback-color
 
 .inputDuedate
   flex: 33%
   padding: 5px
-
+  background-image: $inputback-color
 
 @media only screen and (min-width: 600px) 
   
@@ -185,6 +188,14 @@ video
 
   .btn
     flex: 1
+
+  .pagination 
+    text-align: center
+    justify-content: center
+    
+  .pagination li
+    display: inline
+    margin: 10px
 
 @media only screen and (min-width: 1200px)
   video

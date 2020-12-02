@@ -14,7 +14,7 @@ export class TodoItem extends Component {
       textDecoration: this.props.todo.is_done ? "line-through" : "none",
     };
   };
-
+  //
   componentDidMount = () => {
     console.log(this.props.todo);
   };
