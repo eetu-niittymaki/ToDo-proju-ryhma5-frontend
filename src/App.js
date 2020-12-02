@@ -4,6 +4,8 @@ import Todos from './components/Todos.js'
 import AddTodo from './components/AddTodo.js'
 import Header from './components/layout/Header.js'
 import About from './components/pages/About.js'
+import Play from "./components/sounds/Play.js";
+import SoundEffect from "./components/sounds/SoundEffect.js";
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import TodoCalendar from "./components/pages/TodoCalendar.js";
 import axios from 'axios';
@@ -62,11 +64,15 @@ class App extends Component {
         <div className="App">
           <div className="container">
           <video src='/videos/video-1.mp4' autoPlay loop muted /> 
+            <Play />
+            <SoundEffect />
             <Header/>
             <Route exact path="/" render={props => (
               <React.Fragment>
                 <AddTodo addTodo={this.addTodo}/>
-                <Todos todos={this.state.todos} markComplete={this.markComplete}
+                <Todos 
+                  todos={this.state.todos} 
+                  markComplete={this.markComplete}
                   delTodo={this.delTodo}/>
               </React.Fragment>
             )} />

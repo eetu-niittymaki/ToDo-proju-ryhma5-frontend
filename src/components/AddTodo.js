@@ -38,6 +38,7 @@ export class AddTodo extends Component {
 
   render() {
     return (
+      <div className="addTodosContainer">
       <form
         className="inputFields"
         onSubmit={this.onSubmit}
@@ -82,6 +83,7 @@ export class AddTodo extends Component {
           style={{ float: "1" }}
         />
       </form>
+      </div>
     );
   }
 }
