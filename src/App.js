@@ -4,7 +4,7 @@ import Todos from './components/Todos.js'
 import AddTodo from './components/AddTodo.js'
 import Header from './components/layout/Header.js'
 import About from './components/pages/About.js'
-import Play from "./components/sounds/Play.js";
+//import Play from "./components/sounds/Play.js";
 import SoundEffect from "./components/sounds/SoundEffect.js";
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import TodoCalendar from "./components/pages/TodoCalendar.js";
@@ -28,13 +28,12 @@ class App extends Component {
   }
 
   // Toggle Complete
-  markComplete = id => {
+  markComplete = async id => {
     this.setState({ todos: this.state.todos.map(todo => {
       if(todo.id === id) {
         todo.is_done = !todo.is_done
-        console.log(this.state.todos[id-1].is_done)
         axios.put(`http://localhost:${this.state.port}/todos/${id}`, {
-          is_done: this.state.todos[id-1].is_done
+          is_done: todo.is_done
         })
       }
       return todo
@@ -43,8 +42,10 @@ class App extends Component {
 
   // DELETE ToDo
   delTodo = async id => {
+    try {
     await axios.delete(`http://localhost:${this.state.port}/todos/${id}`) 
       .then(res => this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] }))
+    } catch (err) {}  
   }
 
   // POST Todo
@@ -64,7 +65,6 @@ class App extends Component {
         <div className="App">
           <div className="container">
           <video src='/videos/video-1.mp4' autoPlay loop muted /> 
-            <Play />
             <SoundEffect />
             <Header/>
             <Route exact path="/" render={props => (

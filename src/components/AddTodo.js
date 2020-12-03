@@ -6,10 +6,7 @@ export class AddTodo extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      task: "",
-      priority: "",
-      due_date: "",
-      is_done: "",
+      todos: [],
       port: (process.env.PORT || 8080)
     };
 }
@@ -23,15 +20,12 @@ export class AddTodo extends Component {
       due_date: due_date,
       is_done: false
     })
-      .then(res => this.setState({ todos: [...this.state.todos, res.data] }))  
-      .catch((error) => console.error(error))
-      this.props.addTodo([
-        this.state.task.replace(/^\w/, (c) => c.toUpperCase()),
-        this.state.priority,
-        this.state.due_date,
-        this.state.is_done
-        ]);
-       this.setState({ task: "", priority: "", due_date: "", is_done: "" });
+    this.props.addTodo([
+      this.state.task.replace(/^\w/, (c) => c.toUpperCase()),
+      this.state.priority,
+      this.state.due_date,
+      this.state.is_done
+    ]);
   }
 
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
@@ -45,7 +39,7 @@ export class AddTodo extends Component {
         // style={{ display: "flex", marginBottom: "20px" }}
       >
         <input
-        className="inputTask"
+          className="inputTask"
           type="text"
           name="task"
           // style={{ flex: "10", padding: "5px" }}
@@ -55,7 +49,7 @@ export class AddTodo extends Component {
           required='required'
         />
         <input
-        className="inputPriority"
+          className="inputPriority"
           type="number"
           max="10"
           min="1"
