@@ -1,12 +1,13 @@
 import "./App.sass";
-import React, { Component } from 'react'
-import Todos from './components/Todos.js'
-import AddTodo from './components/AddTodo.js'
-import Header from './components/layout/Header.js'
-import About from './components/pages/About.js'
+import React, { Component } from "react";
+import Todos from "./components/Todos.js";
+import AddTodo from "./components/AddTodo.js";
+import Header from "./components/layout/Header.js";
+import About from "./components/pages/About.js";
 import Play from "./components/sounds/Play.js";
 import SoundEffect from "./components/sounds/SoundEffect.js";
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+// import Pagination from "./components/Paginate.js";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import TodoCalendar from "./components/pages/TodoCalendar.js";
 import axios from "axios";
 
@@ -16,6 +17,8 @@ class App extends Component {
     this.state = {
       todos: [],
       port: process.env.PORT || 8080,
+      //  currentPage: 1,
+      //  todosPerPage: 5,
     };
   }
 
@@ -64,24 +67,53 @@ class App extends Component {
     this.setState({ todos: [...this.state.todos, newTodo] });
   };
 
+  /* indexes = () => {
+    const indexOfLastTodo = this.state.currentPage * this.state.todosPerPage;
+    const indexOfFirstTodo = this.indexOfLastTodo - this.state.todosPerPage;
+    const currentTodos = this.state.todos.slice(
+      indexOfFirstTodo,
+      indexOfLastTodo
+    );
+    return currentTodos;
+  }; */
+
+  /* paginate = (pageNumber) => {
+    if (pageNumber !== this.state.currentPage) {
+      console.log(pageNumber);
+      this.setState({ currentPage: pageNumber });
+      console.log(this.state.currentPage);
+    }
+  }; */
+
   render() {
     return (
       <Router>
         <div className="App">
           <div className="container">
-          <video src='/videos/video-1.mp4' autoPlay loop muted /> 
+            <video src="/videos/video-1.mp4" autoPlay loop muted />
             <Play />
             <SoundEffect />
-            <Header/>
-            <Route exact path="/" render={props => (
-              <React.Fragment>
-                <AddTodo addTodo={this.addTodo}/>
-                <Todos 
-                  todos={this.state.todos} 
-                  markComplete={this.markComplete}
-                  delTodo={this.delTodo}/>
-              </React.Fragment>
-            )} />
+            <Header />
+            <Route
+              exact
+              path="/"
+              render={(props) => (
+                <React.Fragment>
+                  <AddTodo addTodo={this.addTodo} />
+                  <Todos
+                    todos={/*this.indexes()*/ this.state.todos}
+                    markComplete={this.markComplete}
+                    delTodo={this.delTodo}
+                  />
+                  {/* <Pagination
+                    todosPerPage={this.state.todosPerPage}
+                    totalTodos={this.state.todos.length}
+                    paginate={this.paginate}
+                    currentPages={this.state.currentPage}
+                  /> */}
+                </React.Fragment>
+              )}
+            />
             <Route path="/about" component={About} />
             <Route
               path="/TodoCalendar"
