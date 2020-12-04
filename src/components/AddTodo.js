@@ -20,20 +20,26 @@ export class AddTodo extends Component {
       due_date: due_date,
       is_done: false
     })
+    /*
     this.props.addTodo([
       this.state.task.replace(/^\w/, (c) => c.toUpperCase()),
       this.state.priority,
       this.state.due_date,
       this.state.is_done
-    ]);
+    ]);*/
   }
 
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
+
+  refresh = () => {
+    window.location.reload()
+  }
 
   render() {
     return (
       <div className="addTodosContainer">
       <form
+        id="todos"
         className="inputFields"
         onSubmit={this.onSubmit}
         // style={{ display: "flex", marginBottom: "20px" }}
@@ -70,12 +76,15 @@ export class AddTodo extends Component {
           onChange={this.onChange}
           required='required'
         />
-        <input
+        <button
+          form="todos"
           type="submit"
           value="Submit"
           className="btn"
           style={{ float: "1" }}
-        />
+          onClick={this.refresh}
+        >Submit
+        </button>
       </form>
       </div>
     );

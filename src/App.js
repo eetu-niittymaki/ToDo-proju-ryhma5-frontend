@@ -47,7 +47,7 @@ class App extends Component {
       .then(res => this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] }))
     } catch (err) {}  
   }
-
+  /*
   // POST Todo
   addTodo = (task, priority, due_date) => {
     const newTodo = {
@@ -57,8 +57,8 @@ class App extends Component {
       is_done: false
     }
     this.setState({ todos: [...this.state.todos, newTodo] }) 
-  }
-
+  }*/
+  
   render() {
     return (
       <Router>
