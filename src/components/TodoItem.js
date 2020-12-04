@@ -22,7 +22,7 @@ export class TodoItem extends Component {
     if (!this.props.todo) {
       return <div>Loading....</div>
     }
-    const { id, task, priority, due_date, is_done } = this.props.todo;
+    const { id, task, priority, timestamp, due_date, is_done } = this.props.todo;
     return (
       <div className="todoItem" style={this.getStyle()}>
         <div className="checkbox">
@@ -36,7 +36,7 @@ export class TodoItem extends Component {
           &nbsp;
           <div className="todoTask">{task}</div>
           <div className="todoPriority">{priority}</div>
-          <div className="todoDuedate">{due_date}</div>
+          <div className="todoDuedate">Created: {timestamp} <br></br>Due date: {due_date}</div>
           <div className="todoButton">
             <IconButton aria-label="Delete Todo"
               onClick={this.props.delTodo.bind(this, id)}
