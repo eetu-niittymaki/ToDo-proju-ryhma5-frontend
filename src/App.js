@@ -57,7 +57,8 @@ class App extends Component {
       is_done: false
     }
     this.setState({ todos: [...this.state.todos, newTodo] }) 
-  }*/
+  }
+  */
   
   render() {
     return (
