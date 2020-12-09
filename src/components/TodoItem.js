@@ -29,7 +29,7 @@ export class TodoItem extends Component {
             <Checkbox
               color="primary"
               defaultChecked={is_done}
-              onChange={this.props.markComplete.bind(this, id)}
+              onChange={this.props.updateIsDone.bind(this, id)}
               inputProps={{ 'aria-label': 'primary checkbox' }}
             />
         </div>
@@ -39,7 +39,7 @@ export class TodoItem extends Component {
           <div className="todoDuedate">Created: {timestamp} <br></br>Due date: {due_date}</div>
           <div className="todoButton">
             <IconButton aria-label="Delete Todo"
-              onClick={this.props.delTodo.bind(this, id)}
+              onClick={this.props.delTask.bind(this, id)}
             >
               <DeleteOutlined/>
             </IconButton>
@@ -50,9 +50,9 @@ export class TodoItem extends Component {
 }
 
 TodoItem.propTypes = {
-  markComplete: PropTypes.func.isRequired,
+  updateIsDone: PropTypes.func.isRequired,
   todo: PropTypes.object.isRequired,
-  delTodo: PropTypes.func.isRequired
+  delTask: PropTypes.func.isRequired
 }
 
 export default TodoItem;

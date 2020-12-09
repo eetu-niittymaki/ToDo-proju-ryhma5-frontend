@@ -8,7 +8,6 @@ function Header() {
       <h1 className="title">Todo List</h1>
       <div className="headerLink">
       <Link to="/">Home</Link> |&nbsp;<Link to="/TodoCalendar">Calendar</Link>{" "}
-        | <Link to="/about">About</Link>
       </div>
     </header>
   );

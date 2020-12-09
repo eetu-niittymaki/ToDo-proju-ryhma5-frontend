@@ -1,9 +1,8 @@
 import "./App.sass";
 import React, { Component } from 'react'
 import Todos from './components/Todos.js'
-import AddTodo from './components/AddTodo.js'
+import AddTask from './components/AddTask.js'
 import Header from './components/layout/Header.js'
-import About from './components/pages/About.js'
 //import Play from "./components/sounds/Play.js";
 import SoundEffect from "./components/sounds/SoundEffect.js";
 import { BrowserRouter as Router, Route } from 'react-router-dom'
@@ -27,8 +26,8 @@ class App extends Component {
     this.setState({ todos: json })
   }
 
-  // Toggle Complete
-  markComplete = async id => {
+  // Toggle checked/unchecked
+  updateIsDone = async id => {
     this.setState({ todos: this.state.todos.map(todo => {
       if(todo.id === id) {
         todo.is_done = !todo.is_done
@@ -40,16 +39,16 @@ class App extends Component {
     })})
   }
 
-  // DELETE ToDo
-  delTodo = async id => {
+  // DELETE Task
+  delTask = async id => {
     try {
     await axios.delete(`http://localhost:${this.state.port}/todos/${id}`) 
       .then(res => this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] }))
     } catch (err) {}  
   }
-  /*
-  // POST Todo
-  addTodo = (task, priority, due_date) => {
+  
+  // POST Task
+  addTask = (task, priority, due_date) => {
     const newTodo = {
       task: task,
       priority: priority,
@@ -58,7 +57,7 @@ class App extends Component {
     }
     this.setState({ todos: [...this.state.todos, newTodo] }) 
   }
-  */
+  
   
   render() {
     return (
@@ -70,14 +69,13 @@ class App extends Component {
             <Header/>
             <Route exact path="/" render={props => (
               <React.Fragment>
-                <AddTodo addTodo={this.addTodo}/>
+                <AddTask addTask={this.addTask}/>
                 <Todos 
                   todos={this.state.todos} 
-                  markComplete={this.markComplete}
-                  delTodo={this.delTodo}/>
+                  updateIsDone={this.updateIsDone}
+                  delTask={this.delTask}/>
               </React.Fragment>
             )} />
-            <Route path="/about" component={About} />
             <Route path="/TodoCalendar" component={TodoCalendar} />
           </div>
         </div>
