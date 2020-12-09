@@ -1,5 +1,6 @@
 import "./App.sass";
 import React, { Component } from "react";
+import Search from "./components/Search.js";
 import Todos from "./components/Todos.js";
 import AddTodo from "./components/AddTodo.js";
 import Header from "./components/layout/Header.js";
@@ -17,6 +18,7 @@ class App extends Component {
     this.state = {
       todos: [],
       port: process.env.PORT || 8080,
+      // result: [],
       //  currentPage: 1,
       //  todosPerPage: 5,
     };
@@ -85,6 +87,28 @@ class App extends Component {
     }
   }; */
 
+  search = (task, input) => {
+    const result = [];
+    console.log(task.join(" "));
+    if (input !== "") {
+      axios.get(`http://localhost:${this.state.port}/todos/`).then((res) =>
+        res.data.map((todo) => {
+          if (todo.task === task.join(" ")) {
+            result.push(todo);
+            this.setState({ todos: result });
+            result.length = 0;
+          } /* else if (input.length > 1 && ) {
+            this.setState({ todos: [] });
+          } */
+        })
+      );
+    } else {
+      axios.get(`http://localhost:${this.state.port}/todos/`).then((res) => {
+        this.setState({ todos: res.data });
+      }, []);
+    }
+  };
+
   render() {
     return (
       <Router>
@@ -99,7 +123,9 @@ class App extends Component {
               path="/"
               render={(props) => (
                 <React.Fragment>
+                  <Search todos={this.state.todos} search1={this.search} />
                   <AddTodo addTodo={this.addTodo} />
+
                   <Todos
                     todos={/*this.indexes()*/ this.state.todos}
                     markComplete={this.markComplete}
