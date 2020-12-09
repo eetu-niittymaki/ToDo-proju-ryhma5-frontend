@@ -2,9 +2,8 @@ import "./App.sass";
 import React, { Component } from "react";
 import Search from "./components/Search.js";
 import Todos from "./components/Todos.js";
-import AddTodo from "./components/AddTodo.js";
+import AddTask from './components/AddTask.js'
 import Header from "./components/layout/Header.js";
-import About from "./components/pages/About.js";
 import Play from "./components/sounds/Play.js";
 import SoundEffect from "./components/sounds/SoundEffect.js";
 // import Pagination from "./components/Paginate.js";
@@ -31,35 +30,29 @@ class App extends Component {
     this.setState({ todos: json });
   }
 
-  // Toggle Complete
-  markComplete = (id) => {
-    this.setState({
-      todos: this.state.todos.map((todo) => {
-        if (todo.id === id) {
-          todo.is_done = !todo.is_done;
-          console.log(this.state.todos[id - 1].is_done);
-          axios.put(`http://localhost:${this.state.port}/todos/${id}`, {
-            is_done: this.state.todos[id - 1].is_done,
-          });
-        }
-        return todo;
-      }),
-    });
-  };
-
-  // DELETE ToDo
-  delTodo = async (id) => {
-    await axios
-      .delete(`http://localhost:${this.state.port}/todos/${id}`)
-      .then((res) =>
-        this.setState({
-          todos: [...this.state.todos.filter((todo) => todo.id !== id)],
+  // Toggle checked/unchecked
+  updateIsDone = async id => {
+    this.setState({ todos: this.state.todos.map(todo => {
+      if(todo.id === id) {
+        todo.is_done = !todo.is_done
+        axios.put(`http://localhost:${this.state.port}/todos/${id}`, {
+          is_done: todo.is_done
         })
-      );
-  };
+      }
+      return todo
+    })})
+  }
 
-  // POST Todo
-  addTodo = (task, priority, due_date) => {
+  // DELETE Task
+  delTask = async id => {
+    try {
+    await axios.delete(`http://localhost:${this.state.port}/todos/${id}`) 
+      .then(res => this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] }))
+    } catch (err) {}  
+  }
+  
+  // POST Task
+  addTask = (task, priority, due_date) => {
     const newTodo = {
       task: task,
       priority: priority,
@@ -85,6 +78,10 @@ class App extends Component {
       this.setState({ currentPage: pageNumber });
       console.log(this.state.currentPage);
     }
+    this.setState({ todos: [...this.state.todos, newTodo] }) 
+  }
+  
+  
   }; */
 
   search = (task, input) => {
@@ -119,18 +116,16 @@ class App extends Component {
             <SoundEffect />
             <Header />
             <Route
-              exact
               path="/"
+              exact
               render={(props) => (
                 <React.Fragment>
                   <Search todos={this.state.todos} search1={this.search} />
-                  <AddTodo addTodo={this.addTodo} />
-
-                  <Todos
-                    todos={/*this.indexes()*/ this.state.todos}
-                    markComplete={this.markComplete}
-                    delTodo={this.delTodo}
-                  />
+                <AddTask addTask={this.addTask}/>
+                <Todos 
+                  todos={this.state.todos} 
+                  updateIsDone={this.updateIsDone}
+                  delTask={this.delTask}/>
                   {/* <Pagination
                     todosPerPage={this.state.todosPerPage}
                     totalTodos={this.state.todos.length}
@@ -140,10 +135,9 @@ class App extends Component {
                 </React.Fragment>
               )}
             />
-            <Route path="/about" component={About} />
             <Route
-              path="/TodoCalendar"
               component={() => <TodoCalendar todos={this.state.todos} />}
+              path="/TodoCalendar"
             />
           </div>
         </div>

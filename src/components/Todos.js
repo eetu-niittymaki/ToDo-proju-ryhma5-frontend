@@ -4,21 +4,20 @@ import PropTypes from "prop-types";
 
 class Todos extends Component {
   render() {
+    if (this.props.todos.length === 0) {
+      return <div className = "todosPlaceholder">No Todos Yet</div>
+    }
     return this.props.todos.map((todo) => (
-      <TodoItem
-        key={todo.id}
-        todo={todo}
-        markComplete={this.props.markComplete}
-        delTodo={this.props.delTodo}
-      />
-    ));
+      <TodoItem key={todo.id} todo={todo} updateIsDone=
+      {this.props.updateIsDone} delTask={this.props.delTask}/>
+    ))
   }
 }
 
 Todos.propTypes = {
   todos: PropTypes.array.isRequired,
-  markComplete: PropTypes.func.isRequired,
-  delTodo: PropTypes.func.isRequired,
-};
+  updateIsDone: PropTypes.func.isRequired,
+  delTask: PropTypes.func.isRequired
+}
 
 export default Todos;

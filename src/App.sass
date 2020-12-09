@@ -8,6 +8,7 @@ $inputback-color: linear-gradient(grey, white, grey);
 
 @import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap')
 @import url("https://fonts.googleapis.com/css2?family=Squada+One&display=swap")
+@import url("https://fonts.googleapis.com/css2?family=Castoro&display=swap")
 
 body
   height: 100%;
@@ -34,7 +35,7 @@ a
   color: #fff;
   padding: 7px 20px;
   cursor: pointer;
-
+  font-family: "Castoro"
 
 .btn:hover 
   background: #666;
@@ -61,6 +62,12 @@ p
 
 .todoItem p 
   color: $todoitem-color;
+
+.todosPlaceholder
+  text-align: center
+  font-size: 2em
+  color: white
+  font-family: "Castoro"
 
 .calendar
   text-shadow:  1px 1px 10px black, 0 0 3px white
@@ -103,18 +110,23 @@ video
 
 .checkbox
   flex: 25%
+  margin-top: 1%;
   
 .todoTask
   flex: 80%
+  margin-top: 1%;
 
 .todoPriority
   flex: 80%
+  margin-top: 1%;
 
 .todoDuedate
   flex: 100%
+  margin-bottom: 1%;
 
 .todoButton
   flex: 20%
+  margin-top: 1%;
 
 .inputTask
   flex: 100%

@@ -2,61 +2,60 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 
-export class AddTodo extends Component {
+export class AddTask extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      task: "",
-      priority: "",
-      due_date: "",
-      is_done: "",
-      port: process.env.PORT || 8080,
+      todos: [],
+      port: (process.env.PORT || 8080)
     };
   }
   // POST Todo
   onSubmit = async (e) => {
     e.preventDefault();
-    const { task, priority, due_date } = this.state;
-    await axios
-      .post(`http://localhost:${this.state.port}/todos`, {
-        task: task.replace(/^\w/, (c) => c.toUpperCase()),
-        priority: priority,
-        due_date: due_date,
-        is_done: false,
-      })
-      .then((res) => this.setState({ todos: [...this.state.todos, res.data] }))
-      .catch((error) => console.error(error));
-    this.props.addTodo([
+    const {task, priority, due_date} = this.state 
+    await axios.post(`http://localhost:${this.state.port}/todos`, {
+      task: (task.replace(/^\w/, (c) => c.toUpperCase())),
+      priority: priority,
+      due_date: due_date,
+      is_done: false
+    })
+    
+    this.props.addTask([
       this.state.task.replace(/^\w/, (c) => c.toUpperCase()),
       this.state.priority,
       this.state.due_date,
-      this.state.is_done,
+      this.state.is_done
     ]);
-    this.setState({ task: "", priority: "", due_date: "", is_done: "" });
-  };
+  }
 
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
+
+  refresh = () => {
+    window.location.reload()
+  }
 
   render() {
     return (
       <div className="addTodosContainer">
       <form
+        id="todos"
         className="inputFields"
         onSubmit={this.onSubmit}
         // style={{ display: "flex", marginBottom: "20px" }}
       >
         <input
-        className="inputTask"
+          className="inputTask"
           type="text"
           name="task"
           // style={{ flex: "10", padding: "5px" }}
-          placeholder="Add Todo..."
+          placeholder="Add Task..."
           value={this.state.task}
           onChange={this.onChange}
           required='required'
         />
         <input
-        className="inputPriority"
+          className="inputPriority"
           type="number"
           max="10"
           min="1"
@@ -77,20 +76,24 @@ export class AddTodo extends Component {
           onChange={this.onChange}
           required='required'
         />
-        <input
+        <button
+          form="todos"
           type="submit"
           value="Submit"
           className="btn"
           style={{ float: "1" }}
-        />
+          onClick={this.refresh}
+          disabled={!this.state.due_date}
+        >Submit
+        </button>
       </form>
       </div>
     );
   }
 }
 
-AddTodo.propTypes = {
-  addTodo: PropTypes.func.isRequired,
-};
+AddTask.propTypes = {
+  addTask: PropTypes.func.isRequired
+}
 
-export default AddTodo;
+export default AddTask;
