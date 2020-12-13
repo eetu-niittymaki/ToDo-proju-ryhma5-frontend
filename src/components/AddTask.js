@@ -31,10 +31,6 @@ export class AddTask extends Component {
 
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
-  refresh = () => {
-    window.location.reload()
-  }
-
   render() {
     return (
       <div className="addTodosContainer">
@@ -82,8 +78,6 @@ export class AddTask extends Component {
           value="Submit"
           className="btn"
           style={{ float: "1" }}
-          onClick={this.refresh}
-          disabled={!this.state.due_date}
         >Submit
         </button>
       </form>

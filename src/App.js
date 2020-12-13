@@ -3,11 +3,12 @@ import React, { Component } from 'react'
 import Todos from './components/Todos.js'
 import AddTask from './components/AddTask.js'
 import Header from './components/layout/Header.js'
-//import Play from "./components/sounds/Play.js";
+// import Play from "./components/sounds/Play.js";
 import SoundEffect from "./components/sounds/SoundEffect.js";
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import TodoCalendar from "./components/pages/TodoCalendar.js";
 import Sorting from "./components/Sorting.js"
+import DeleteCompleted from "./components/DeleteCompleted.js"
 import axios from 'axios';
 
 class App extends Component {
@@ -46,6 +47,10 @@ class App extends Component {
       .then(res => this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] }))
     } catch (err) {}  
   }
+
+  refresh = () => {
+    window.location.reload()
+  }
   
   // POST Task
   addTask = (task, priority, due_date) => {
@@ -55,11 +60,16 @@ class App extends Component {
       due_date: due_date,
       is_done: false
     }
-    this.setState({ todos: [...this.state.todos, newTodo] }) 
+    this.setState({ todos: [...this.state.todos, newTodo] })
+    this.refresh() 
   }
 
   handleSorting = (sortedTodos) => {
-    this.setState({todos: sortedTodos})
+    this.setState({ todos: sortedTodos })
+  }
+
+  handleDelete = (newTodos) => {
+    this.setState({ todos: newTodos })
   }
 
   render() {
@@ -70,6 +80,10 @@ class App extends Component {
           <video src='/videos/video-1.mp4' autoPlay loop muted /> 
             <SoundEffect />
             <Header/>
+            <DeleteCompleted
+              todos={this.state.todos} 
+              handleDelete={this.handleDelete}
+              />
             <Sorting 
               handleSorting={this.handleSorting}/>
             <Route exact path="/" render={props => (

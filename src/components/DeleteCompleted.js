@@ -1,0 +1,40 @@
+import React, { Component } from "react"
+import "../App.sass"
+import axios from "axios"
+
+export default class DeleteCompleted extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      todos: this.props.todos,
+      newTodos: [],
+      port: (process.env.PORT || 8080)
+    }
+  }
+
+  deleteCompleted = async () => {
+    const del = window.confirm("Delete completed tasks?")
+    if (del) {
+      await axios.delete(`http://localhost:${this.state.port}/todos`)
+      const res = await fetch(`http://localhost:${this.state.port}/todos?sort=timestamp&order_by=asc`)
+      const json = await res.json()
+      this.setState({ newTodos: json })
+      this.handleDelete()
+    }
+  }
+  
+  handleDelete = () => {
+    this.props.handleDelete(this.state.newTodos)
+  }
+
+  render() {
+    return(
+      <button 
+        className="deleteBtn"
+        type="Button"
+        onClick={this.deleteCompleted}>
+         Delete Completed
+      </button>
+    )
+  }
+}
