@@ -7,6 +7,7 @@ export class AddTask extends Component {
     super(props)
     this.state = {
       todos: [],
+      date: "",
       port: (process.env.PORT || 8080)
     };
 }
@@ -29,8 +30,8 @@ export class AddTask extends Component {
     ]);
   }
 
-  onChange = (e) => this.setState({ [e.target.name]: e.target.value });
-
+  onChange = (e) => this.setState({ [e.target.name]: e.target.value })
+  
   render() {
     return (
       <div className="addTodosContainer">
@@ -71,6 +72,7 @@ export class AddTask extends Component {
           value={this.state.due_date}
           onChange={this.onChange}
           required='required'
+          min={this.props.date}
         />
         <button
           form="todos"

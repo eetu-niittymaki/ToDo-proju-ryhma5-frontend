@@ -16,6 +16,7 @@ class App extends Component {
     super(props)
     this.state = {
       todos: [],
+      date: "",
       port: (process.env.PORT || 8080)
     }
   }
@@ -25,6 +26,7 @@ class App extends Component {
     let hr = await fetch(`http://localhost:${this.state.port}/todos?sort=timestamp&order_by=asc`)
     let json = await hr.json()
     this.setState({ todos: json })
+    this.getDate()
   }
 
   // Toggle checked/unchecked
@@ -51,7 +53,25 @@ class App extends Component {
   refresh = () => {
     window.location.reload()
   }
+
+  getDate = () => {
+    var today = new Date()
+    var day = today.getDate()
+    var month = today.getMonth()+1
+    var year = today.getFullYear()
   
+    if(day < 10) {
+        day = '0' + day
+    } 
+  
+    if(month < 10) {
+        month = '0' + month 
+    } 
+  
+    today = year + '-' + month + '-' + day
+    this.setState({ date: today })
+  }
+
   // POST Task
   addTask = (task, priority, due_date) => {
     const newTodo = {
@@ -71,7 +91,7 @@ class App extends Component {
   handleDelete = (newTodos) => {
     this.setState({ todos: newTodos })
   }
-
+  
   render() {
     return (
       <Router>
@@ -88,7 +108,10 @@ class App extends Component {
               handleSorting={this.handleSorting}/>
             <Route exact path="/" render={props => (
               <React.Fragment>
-                <AddTask addTask={this.addTask}/>
+                <AddTask 
+                  addTask={this.addTask}
+                  date={this.state.date}
+                  />
                 <Todos 
                   todos={this.state.todos} 
                   updateIsDone={this.updateIsDone}
