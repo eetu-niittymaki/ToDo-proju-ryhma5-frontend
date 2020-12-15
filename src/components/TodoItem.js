@@ -19,9 +19,6 @@ export class TodoItem extends Component {
   }
 
   render() {
-    if (!this.props.todo) {
-      return <div>Loading....</div>
-    }
     const { id, task, priority, timestamp, due_date, is_done } = this.props.todo;
     return (
       <div className="todoItem" style={this.getStyle()}>

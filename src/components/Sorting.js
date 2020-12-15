@@ -16,7 +16,7 @@ export default class Sorting extends Component {
   // Sort by Task
   sortTask = async () => {
     let method = (this.state.sortTask) ? "asc" : "desc"
-    let hr = await fetch(`http://localhost:${this.state.port}/todos?sort=task&order_by=${method}`)
+    let hr = await fetch(`http://localhost:${this.state.port}/todos?sort=task&order_by=${method}&task=${this.props.search}`)
     let json = await hr.json()
     this.setState({ sortedTodos: json, sortTask: !this.state.sortTask })
     this.handleSorting()
@@ -25,7 +25,7 @@ export default class Sorting extends Component {
   // Sort by Priority
   sortPriority = async () => {
     let method = (this.state.sortPriority) ? "asc" : "desc"
-    let hr = await fetch(`http://localhost:${this.state.port}/todos?sort=priority&order_by=${method}`)
+    let hr = await fetch(`http://localhost:${this.state.port}/todos?sort=priority&order_by=${method}&task=${this.props.search}`)
     let json = await hr.json()
     this.setState({ sortedTodos: json, sortPriority: !this.state.sortPriority })
     this.handleSorting()
@@ -34,7 +34,7 @@ export default class Sorting extends Component {
   // Sort by Due Date
   sortDueDate = async () => {
     let method = (this.state.sortDueDate) ? "asc" : "desc"
-    let hr = await fetch(`http://localhost:${this.state.port}/todos?sort=due_date&order_by=${method}`)
+    let hr = await fetch(`http://localhost:${this.state.port}/todos?sort=due_date&order_by=${method}&task=${this.props.search}`)
     let json = await hr.json()
     this.setState({ sortedTodos: json, sortDueDate: !this.state.sortDueDate })
     this.handleSorting()

@@ -8,8 +8,10 @@ import SoundEffect from "./components/sounds/SoundEffect.js";
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import TodoCalendar from "./components/pages/TodoCalendar.js";
 import Sorting from "./components/Sorting.js"
+import Search from "./components/Search.js"
 import DeleteCompleted from "./components/DeleteCompleted.js"
 import axios from 'axios';
+
 
 class App extends Component {
   constructor(props) {
@@ -17,13 +19,15 @@ class App extends Component {
     this.state = {
       todos: [],
       date: "",
-      port: (process.env.PORT || 8080)
+      search: "",
+      sortBy: "",
+      port: (process.env.PORT || 8080),
     }
   }
 
   // GET all
-  async componentDidMount() {
-    let hr = await fetch(`http://localhost:${this.state.port}/todos?sort=timestamp&order_by=asc`)
+  componentDidMount = async () => {
+    let hr = await fetch(`http://localhost:${this.state.port}/todos?sort=timestamp&order_by=asc&task=${this.state.search}`)
     let json = await hr.json()
     this.setState({ todos: json })
     this.getDate()
@@ -84,12 +88,16 @@ class App extends Component {
     this.refresh() 
   }
 
-  handleSorting = (sortedTodos) => {
-    this.setState({ todos: sortedTodos })
+  handleSorting = (sortedTodos, sortBy) => {
+    this.setState({ todos: sortedTodos, sortBy: sortBy })
   }
 
   handleDelete = (newTodos) => {
     this.setState({ todos: newTodos })
+  }
+
+  handleSearch = (filterTodos) => {
+    this.setState({ todos: filterTodos})
   }
   
   render() {
@@ -102,20 +110,22 @@ class App extends Component {
             <Header/>
             <DeleteCompleted
               todos={this.state.todos} 
-              handleDelete={this.handleDelete}
-              />
+              handleDelete={this.handleDelete} />
+            <Search 
+              handleSearch={this.handleSearch}
+               />
             <Sorting 
-              handleSorting={this.handleSorting}/>
+              search={this.state.search}
+              handleSorting={this.handleSorting} />
             <Route exact path="/" render={props => (
               <React.Fragment>
                 <AddTask 
                   addTask={this.addTask}
-                  date={this.state.date}
-                  />
+                  date={this.state.date} />
                 <Todos 
                   todos={this.state.todos} 
                   updateIsDone={this.updateIsDone}
-                  delTask={this.delTask}/>
+                  delTask={this.delTask} />
               </React.Fragment>
             )} />
             <Route path="/TodoCalendar" component={TodoCalendar} />
