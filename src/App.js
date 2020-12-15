@@ -109,6 +109,7 @@ class App extends Component {
             <SoundEffect />
             <Header/>
             <DeleteCompleted
+              search={this.state.search}
               todos={this.state.todos} 
               handleDelete={this.handleDelete} />
             <Search 
