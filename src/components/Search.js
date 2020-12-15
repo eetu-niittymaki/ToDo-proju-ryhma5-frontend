@@ -7,22 +7,20 @@ export default class Search extends Component {
     this.state = {
       task: "",
       filterTodos: "",
-      loading: false,
       port: (process.env.PORT || 8080),
     }
   }
 
   search = async (val) => {
-    this.setState({ loading: true})
     const res = await fetch(`http://localhost:${this.state.port}/todos?sort=timestamp&order_by=asc&task=${val}`)
     const json = await res.json()
-    this.setState({filterTodos: json, loading: false})
+    this.setState({ filterTodos: json })
     this.handleSearch()
   } 
 
   handleChange = async (e) => {
     this.search(e.target.value)
-    this.setState({task: e.target.value})
+    this.setState({ task: e.target.value })
   }
 
   handleSearch = () => {
