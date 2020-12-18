@@ -43,7 +43,6 @@ a
 .deleteBtn 
   display: inline-block;
   border: none;
-  text-align: left
   background: #555;
   color: #fff;
   padding: 7px 10px;
@@ -52,6 +51,8 @@ a
   margin-bottom: 1%
   font-family: "Squada One"
   font-size: 20px
+  border-radius: 5px;
+
 
 .deleteBtn:hover 
   background: #666;
@@ -172,17 +173,22 @@ video
   font-size: 20px
   margin-left: 5px
 
-
 .sortBtn:hover 
   background: #666;
 
-.searchButton
+.searchInput
   margin-left: 23%
+  width: 8%
+  transition: width 0.4s ease-in-out;
+
+.searchInput:focus
+  width: 15%
 
 @media only screen and (min-width: 600px) 
   
   video
     margin-left: -3%
+
 
 @media only screen and (min-width: 768px)
   
@@ -240,3 +246,17 @@ video
 @media only screen and (min-width: 1200px)
   video
     margin-left: -1%
+
+@media only screen and (max-width: 600px)
+ 
+  .deleteBtn  
+    margin-left: 30%
+
+  .searchInput
+    margin-left: 30%
+    width: 37%
+    transition: width 0.4s ease-in-out;
+
+  .searchInput:focus
+    width: 40%
+

@@ -31,7 +31,7 @@ export default class Search extends Component {
     return ( 
       <div>
         <input 
-          className="searchButton" 
+          className="searchInput"
           value={this.state.task}
           onChange={this.handleChange}
           placeholder="Search Task" />
