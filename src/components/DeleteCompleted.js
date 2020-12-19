@@ -6,7 +6,6 @@ export default class DeleteCompleted extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      todos: this.props.todos,
       newTodos: [],
       port: (process.env.PORT || 8080)
     }
@@ -28,12 +27,16 @@ export default class DeleteCompleted extends Component {
   }
 
   render() {
+    const result = this.props.todos.filter(task => task.is_done === 1)
+    console.log(result)
     return(
-      <button 
+      <button
         className="deleteBtn"
-        type="Button"
-        onClick={this.deleteCompleted}>
-         Delete Completed
+        type="button"
+        onClick={this.deleteCompleted}
+        disabled={!result.length}
+        >
+        Delete Completed
       </button>
     )
   }

@@ -4,6 +4,7 @@ $todoitem-color: black
 $link-color: aqua
 $calendartileback-color: -webkit-linear-gradient(black, black, #555555,  #000127, #000127, #000127)
 $calendartile-color: white
+$inputback-color: linear-gradient(grey, white, grey);
 
 @import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap')
 @import url("https://fonts.googleapis.com/css2?family=Squada+One&display=swap")
@@ -19,14 +20,12 @@ body
   background-size: 9000px;
   background-position: center;
 
-
 a
   color: darkcyan;
   text-decoration: none;
 
 .container 
   padding: 0 1rem;
-
 
 .btn 
   display: inline-block;
@@ -35,7 +34,8 @@ a
   color: #fff;
   padding: 7px 20px;
   cursor: pointer;
-  font-family: "Castoro"
+  font-family: "Squada One"
+  font-size: 20px
 
 .btn:hover 
   background: #666;
@@ -53,19 +53,24 @@ a
   font-size: 20px
   border-radius: 5px;
 
+.deleteBtn:disabled
+  background-color: #eee
+  color: grey
+  border: solid 1px red
+
+.deleteBtn:disabled:hover
+  background-color: #eee
+  color: grey
 
 .deleteBtn:hover 
   background: #666;
-
 
 .headerLink 
   color: $link-color;
   font-size: large;
 
-
 p 
   color: #fff;
-
 
 .todoItem 
   text-align: center
@@ -75,7 +80,6 @@ p
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
-
 
 .todoItem p 
   color: $todoitem-color;
@@ -161,7 +165,7 @@ video
   color: white
   text-align: center
   margin-bottom: 1%
-
+  
 .sortBtn
   display: inline-block
   border: none;

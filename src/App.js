@@ -4,7 +4,7 @@ import Todos from './components/Todos.js'
 import AddTask from './components/AddTask.js'
 import Header from './components/layout/Header.js'
 // import Play from "./components/sounds/Play.js";
-import SoundEffect from "./components/sounds/SoundEffect.js";
+// import SoundEffect from "./components/sounds/SoundEffect.js";
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import TodoCalendar from "./components/pages/TodoCalendar.js";
 import Sorting from "./components/Sorting.js"
@@ -20,7 +20,6 @@ class App extends Component {
       todos: [],
       date: "",
       search: "",
-      sortBy: "",
       port: (process.env.PORT || 8080),
     }
   }
@@ -48,32 +47,11 @@ class App extends Component {
 
   // DELETE Task
   delTask = async id => {
-    try {
-    await axios.delete(`http://localhost:${this.state.port}/todos/${id}`) 
-      .then(res => this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] }))
-    } catch (err) {}  
-  }
-
-  refresh = () => {
-    window.location.reload()
-  }
-
-  getDate = () => {
-    var today = new Date()
-    var day = today.getDate()
-    var month = today.getMonth()+1
-    var year = today.getFullYear()
-  
-    if(day < 10) {
-        day = '0' + day
-    } 
-  
-    if(month < 10) {
-        month = '0' + month 
-    } 
-  
-    today = year + '-' + month + '-' + day
-    this.setState({ date: today })
+    const del = window.confirm('Delete task?')
+    if (del) {
+     await axios.delete(`http://localhost:${this.state.port}/todos/${id}`) 
+      . then(res => this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] }))  
+    }
   }
 
   // POST Task
@@ -88,8 +66,30 @@ class App extends Component {
     this.refresh() 
   }
 
-  handleSorting = (sortedTodos, sortBy) => {
-    this.setState({ todos: sortedTodos, sortBy: sortBy })
+  refresh = () => {
+    window.location.reload()
+  }
+
+  getDate = () => {
+    let today = new Date()
+    let day = today.getDate()
+    let month = today.getMonth()+1
+    const year = today.getFullYear()
+  
+    if(day < 10) {
+        day = '0' + day
+    } 
+  
+    if(month < 10) {
+        month = '0' + month 
+    } 
+  
+    today = year + '-' + month + '-' + day
+    this.setState({ date: today })
+  }
+
+  handleSorting = (sortedTodos) => {
+    this.setState({ todos: sortedTodos })
   }
 
   handleDelete = (newTodos) => {
@@ -97,7 +97,7 @@ class App extends Component {
   }
 
   handleSearch = (filterTodos) => {
-    this.setState({ todos: filterTodos})
+    this.setState({ todos: filterTodos })
   }
   
   render() {
@@ -106,11 +106,10 @@ class App extends Component {
         <div className="App">
           <div className="container">
           <video src='/videos/video-1.mp4' autoPlay loop muted /> 
-            <SoundEffect />
             <Header/>
             <DeleteCompleted
+              todos={this.state.todos}
               search={this.state.search}
-              todos={this.state.todos} 
               handleDelete={this.handleDelete} />
             <Search 
               handleSearch={this.handleSearch}
@@ -129,7 +128,10 @@ class App extends Component {
                   delTask={this.delTask} />
               </React.Fragment>
             )} />
-            <Route path="/TodoCalendar" component={TodoCalendar} />
+           <Route
+              component={() => <TodoCalendar todos={this.state.todos} />}
+              path="/TodoCalendar"
+            />
           </div>
         </div>
       </Router>
