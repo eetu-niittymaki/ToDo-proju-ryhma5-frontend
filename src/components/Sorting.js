@@ -13,7 +13,7 @@ export default class Sorting extends Component {
     }
   }
 
-  sort = async (sort) => {
+  sort = async (sort) => { // Parameter from button press
     const dynamicName = eval(`this.state.sort_${sort}`) // Evaluates string so it can be used as a concatenated dynamic variable name. 
     const method = (dynamicName) ? "asc" : "desc"       // Documentation says to never use eval() but I don't care.
     const sortObj = {}         
@@ -27,17 +27,19 @@ export default class Sorting extends Component {
     this.handleSorting()
   }
   
+  // Sends value forward to handle function in App.js
   handleSorting = () => {
     this.props.handleSorting(this.state.sortedTodos)
   }
 
   render() {
     return(
+      // Function is called with different parameters, depending on whic button user presses
       <div className="sortContainer">Sort By: 
         <button 
           type="button"
           className="sortBtn"
-          onClick={() => this.sort("task")}
+          onClick={() => this.sort("task")} 
         > Task 
         </button>
         <button 

@@ -12,7 +12,7 @@ export default class DeleteCompleted extends Component {
   }
 
   deleteCompleted = async () => {
-    const del = window.confirm("Delete completed tasks?")
+    const del = window.confirm("Delete completed tasks?") // If user accepts sends DELETE request to backend
     if (del) {
       await axios.delete(`http://localhost:${this.state.port}/todos`)
       const res = await fetch(`http://localhost:${this.state.port}/todos?sort=timestamp&order_by=asc&task=${this.props.search}`)
@@ -22,6 +22,7 @@ export default class DeleteCompleted extends Component {
     }
   }
   
+  // Sends value forward to handle function in App.js
   handleDelete = () => {
     this.props.handleDelete(this.state.newTodos)
   }

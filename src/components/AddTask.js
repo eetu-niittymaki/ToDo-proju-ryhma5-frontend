@@ -21,7 +21,7 @@ export class AddTask extends Component {
       due_date: due_date,
       is_done: false
     })
-    
+    // Sends values to App.js' addTask() function
     this.props.addTask([
       this.state.task.replace(/^\w/, (c) => c.toUpperCase()),
       this.state.priority,
@@ -29,7 +29,7 @@ export class AddTask extends Component {
       this.state.is_done
     ]);
   }
-
+  // Updates form values when changed and sets state according to them
   onChange = (e) => this.setState({ [e.target.name]: e.target.value })
   
   render() {
