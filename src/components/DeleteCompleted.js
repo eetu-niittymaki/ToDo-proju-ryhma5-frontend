@@ -27,14 +27,11 @@ export default class DeleteCompleted extends Component {
   }
 
   render() {
-    const result = this.props.todos.filter(task => task.is_done === 1)
-    console.log(result)
     return(
       <button
         className="deleteBtn"
         type="button"
         onClick={this.deleteCompleted}
-        disabled={!result.length}
         >
         Delete Completed
       </button>
