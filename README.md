@@ -6,4 +6,4 @@ Toiminnallisuus:
 
 Listaan lisättäessä uusi todo kaikki kolme kenttää pitää täyttää. 
 Nappeja painamalla voit määritellä miten tehtävät lajitellaan; ensimmäisellä painalluksella asc, toisella desc.
-Calendar sivulla näet kalenterissa jäljellä olevat tehtävät (ei toimi firefoxilla).
+Calendar sivulla näkyy kalenteri muodossa jäljellä olevat tehtävät, due daten mukaan.
